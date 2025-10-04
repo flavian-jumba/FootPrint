@@ -2,9 +2,11 @@
 
 @section('content')
 
+{{-- Add AOS CSS library for scroll animations --}}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 {{-- Home Section --}}
-<div class="bg-gray-900">
+<div id="home" class="bg-gray-900">
   <header id="navbar" class="fixed inset-x-0 top-0 z-50 transition-all duration-300 bg-transparent">
     <nav aria-label="Global" class="flex items-center justify-between p-6 lg:px-8">
       <div class="flex lg:flex-1">
@@ -22,10 +24,11 @@
         </button>
       </div>
       <div class="hidden lg:flex lg:gap-x-12">
-        <a href="#" class="text-sm/6 font-semibold text-white">Home</a>
-        <a href="#" class="text-sm/6 font-semibold text-white">About</a>
-        <a href="#" class="text-sm/6 font-semibold text-white">What we Do</a>
-        <a href="#" class="text-sm/6 font-semibold text-white">Join Us Mission</a>
+        <a href="#home" class="text-sm/6 font-semibold text-white scroll-smooth">Home</a>
+        <a href="#about" class="text-sm/6 font-semibold text-white scroll-smooth">About</a>
+        <a href="#programs" class="text-sm/6 font-semibold text-white scroll-smooth">What we Do</a>
+        <a href="#testimonials" class="text-sm/6 font-semibold text-white scroll-smooth">Testimonials</a>
+        <a href="#contact" class="text-sm/6 font-semibold text-white scroll-smooth">Join Us</a>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         <a href="#" class="rounded-md bg-indigo-500 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Contact Us</a>
@@ -51,10 +54,11 @@
           <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-white/10">
               <div class="space-y-2 py-6">
-                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-white/5">Home</a>
-                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-white/5">About</a>
-                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-white/5">What We Do</a>
-                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-white/5">Join Us</a>
+                <a href="#home" class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-white/5">Home</a>
+                <a href="#about" class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-white/5">About</a>
+                <a href="#programs" class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-white/5">What We Do</a>
+                <a href="#testimonials" class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-white/5">Testimonials</a>
+                <a href="#contact" class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-white/5">Join Us</a>
               </div>
               <div class="py-6">
                 <a href="#" class="block rounded-md bg-indigo-500 px-4 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-indigo-400">Contact Us</a>
@@ -118,6 +122,34 @@
           
           lastScrollTop = scrollTop;
         });
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            // Close mobile menu if open
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+              mobileMenu.classList.add('hidden');
+            }
+            
+            // Get the target element
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+              // Calculate position to scroll to (with offset for fixed header)
+              const headerOffset = 80; // Adjust based on your header height
+              const elementPosition = targetElement.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+              
+              // Smooth scroll to target
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
       });
     </script>
   </header>
@@ -127,15 +159,15 @@
       <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-288.75"></div>
     </div>
     <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-      <div class="hidden sm:mb-8 sm:flex sm:justify-center">
+      <div class="hidden sm:mb-8 sm:flex sm:justify-center" data-aos="fade-down" data-aos-delay="100">
         <div class="relative rounded-full px-3 py-1 text-sm/6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20">
           Announcing our next round of funding. <a href="#" class="font-semibold text-indigo-400"><span aria-hidden="true" class="absolute inset-0"></span>Read more <span aria-hidden="true">&rarr;</span></a>
         </div>
       </div>
       <div class="text-center">
-        <h1 class="text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl">Empowering the next generation,one footprint at a time</h1>
-        <p class="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">Footprints of Hope empowers Kenya's girls, youth, and women with resources, education, and support for resilient futures.</p>
-        <div class="mt-10 flex items-center justify-center gap-x-6">
+        <h1 class="text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl" data-aos="fade-up" data-aos-delay="200">Empowering the next generation,one footprint at a time</h1>
+        <p class="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8" data-aos="fade-up" data-aos-delay="300">Footprints of Hope empowers Kenya's girls, youth, and women with resources, education, and support for resilient futures.</p>
+        <div class="mt-10 flex items-center justify-center gap-x-6" data-aos="fade-up" data-aos-delay="400">
           <a href="#" class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Get started</a>
           <a href="#" class="text-sm/6 font-semibold text-white">Learn more <span aria-hidden="true">→</span></a>
         </div>
@@ -150,7 +182,7 @@
 
 {{-- About section --}}
 
-<div class="relative isolate overflow-hidden bg-gray-900 px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0 about-section">
+<div id="about" class="relative isolate overflow-hidden bg-gray-900 px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0 about-section">
   <div class="absolute inset-0 -z-10 overflow-hidden">
     <svg aria-hidden="true" class="absolute top-0 left-[max(50%,25rem)] h-256 w-512 -translate-x-1/2 mask-[radial-gradient(64rem_64rem_at_top,white,transparent)] stroke-gray-800">
       <defs>
@@ -165,7 +197,7 @@
     </svg>
   </div>
   <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
-    <div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+    <div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8" data-aos="fade-right">
       <div class="lg:pr-4">
         <div class="lg:max-w-lg">
           <p class="text-base/7 font-semibold text-indigo-400">About Us</p>
@@ -174,11 +206,11 @@
         </div>
       </div>
     </div>
-    <div class="-mt-12 -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
-      <img src="{{ asset('images/one.png') }}" alt="" class="w-3xl max-w-none rounded-xl bg-gray-800 shadow-xl ring-1 ring-white/10 sm:w-228" />
+    <div class="-mt-12 -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden" data-aos="fade-left" data-aos-delay="100">
+      <img loading="lazy" src="{{ asset('images/one.png') }}" alt="" class="w-3xl max-w-none rounded-xl bg-gray-800 shadow-xl ring-1 ring-white/10 sm:w-228" />
     </div>
     <div class="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
-      <div class="lg:pr-4">
+      <div class="lg:pr-4" data-aos="fade-up">
         <div class="max-w-xl text-base/7 text-gray-400 lg:max-w-lg">
           <p>Founded in 2019 in Busia, Kenya, Footprints of Hope Foundation is a community-based organization focused on empowering girls, youth, and women. We address key social issues including menstrual hygiene, sexual and reproductive health, children's rights, socio-economic empowerment, and mental health through compassionate and action-driven programs.</p>
           <ul role="list" class="mt-8 space-y-8 text-gray-400">
@@ -212,24 +244,24 @@
 </div>
 
 {{-- Our Programs  --}}
-<div class="bg-gray-900 py-24 sm:py-32">
+<div id="programs" class="bg-gray-900 py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl text-center">
+    <div class="mx-auto max-w-2xl text-center" data-aos="fade-up">
       <p class="text-base font-semibold leading-7 text-indigo-400">Our Programs</p>
       <h1 class="mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl">On a mission to empower communities</h1>
       <p class="mt-6 text-lg leading-8 text-gray-300">We create sustainable programs designed to address the specific needs of girls, youth, and women in our communities.</p>
     </div>
     <section class="mx-auto mt-16 grid max-w-7xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-2">
-      <div class="lg:pr-8">
+      <div class="lg:pr-8" data-aos="fade-right">
         <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Our Impact Areas</h2>
         <p class="mt-6 text-base leading-7 text-gray-300">Through our targeted programs, we focus on menstrual hygiene, education support, vocational training, and mental health awareness to create lasting change in our communities.</p>
         <p class="mt-6 text-base leading-7 text-gray-300">Each of our initiatives is designed with community input and implemented with local partnerships to ensure sustainability and maximum impact for those we serve.</p>
       </div>
-      <div class="grid grid-cols-2 gap-4 sm:gap-6">
+      <div class="grid grid-cols-2 gap-4 sm:gap-6" data-aos="fade-left">
         <div class="grid grid-rows-2 gap-4 sm:gap-6">
           <!-- Program 1: Teenage Mother Support Program -->
-          <div class="group relative overflow-hidden rounded-lg">
-            <img src="{{ asset('images/a.png') }}" alt="Teenage Mother Support Program" class="h-full w-full object-cover object-center transition-all duration-300 group-hover:scale-105">
+          <div class="group relative overflow-hidden rounded-lg" data-aos="zoom-in" data-aos-delay="100">
+            <img loading="lazy" src="{{ asset('images/a.png') }}" alt="Teenage Mother Support Program" class="h-full w-full object-cover object-center transition-all duration-300 group-hover:scale-105">
             <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 opacity-0 transition-all duration-300 group-hover:opacity-100">
               <h3 class="text-lg font-bold text-pink-400">Teenage Mother Support Program</h3>
               <p class="text-sm text-white">Resources and support for young mothers to continue education and develop skills.</p>
@@ -243,8 +275,8 @@
           </div>
           
           <!-- Program 2: Socio-Economic Empowerment -->
-          <div class="group relative overflow-hidden rounded-lg sm:relative sm:top-8">
-            <img src="{{ asset('images/b.png') }}" alt="Socio-Economic Empowerment Program" class="h-full w-full object-cover object-center transition-all duration-300 group-hover:scale-105">
+          <div class="group relative overflow-hidden rounded-lg sm:relative sm:top-8" data-aos="zoom-in" data-aos-delay="200">
+            <img loading="lazy" src="{{ asset('images/b.png') }}" alt="Socio-Economic Empowerment Program" class="h-full w-full object-cover object-center transition-all duration-300 group-hover:scale-105">
             <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 opacity-0 transition-all duration-300 group-hover:opacity-100">
               <h3 class="text-lg font-bold text-pink-400">Socio-Economic Empowerment</h3>
               <p class="text-sm text-white">Business development, skill training, and financial resources for women and youth.</p>
@@ -260,8 +292,8 @@
         
         <div class="grid grid-rows-2 gap-4 sm:gap-6">
           <!-- Program 3: Nhanga Sessions for Mental Health -->
-          <div class="group relative overflow-hidden rounded-lg sm:relative sm:top-8">
-            <img src="{{ asset('images/c.png') }}" alt="Nhanga Sessions for Mental Health" class="h-full w-full object-cover object-center transition-all duration-300 group-hover:scale-105">
+          <div class="group relative overflow-hidden rounded-lg sm:relative sm:top-8" data-aos="zoom-in" data-aos-delay="300">
+            <img loading="lazy" src="{{ asset('images/c.png') }}" alt="Nhanga Sessions for Mental Health" class="h-full w-full object-cover object-center transition-all duration-300 group-hover:scale-105">
             <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 opacity-0 transition-all duration-300 group-hover:opacity-100">
               <h3 class="text-lg font-bold text-pink-400">Nhanga Sessions for Mental Health</h3>
               <p class="text-sm text-white">Safe spaces and professional counseling for emotional wellbeing and mental health.</p>
@@ -275,8 +307,8 @@
           </div>
           
           <!-- Program 4: Community Mobilization -->
-          <div class="group relative overflow-hidden rounded-lg">
-            <img src="{{ asset('images/d.png') }}" alt="Community Mobilization Program" class="h-full w-full object-cover object-center transition-all duration-300 group-hover:scale-105">
+          <div class="group relative overflow-hidden rounded-lg" data-aos="zoom-in" data-aos-delay="400">
+            <img loading="lazy" src="{{ asset('images/d.png') }}" alt="Community Mobilization Program" class="h-full w-full object-cover object-center transition-all duration-300 group-hover:scale-105">
             <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 opacity-0 transition-all duration-300 group-hover:opacity-100">
               <h3 class="text-lg font-bold text-pink-400">Community Mobilization</h3>
               <p class="text-sm text-white">Collective action for health education, social awareness, and sustainable development.</p>
@@ -290,25 +322,25 @@
           </div>
         </div>
       </div>
-      <div class="lg:col-span-2">
+      <div class="lg:col-span-2" data-aos="fade-up">
         <p class="text-base font-semibold leading-7 text-white">Our Impact</p>
         <hr class="mt-2 border-gray-700">
         <dl class="mt-10 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-4">
-          <div>
+          <div data-aos="fade-up" data-aos-delay="100" class="counter-wrapper">
             <dt class="text-sm font-medium leading-6 text-gray-400">People Reached</dt>
-            <dd class="mt-2 text-3xl font-bold leading-10 tracking-tight text-white">15K+</dd>
+            <dd class="mt-2 text-3xl font-bold leading-10 tracking-tight text-white counter" data-target="15000">0</dd>
           </div>
-          <div>
+          <div data-aos="fade-up" data-aos-delay="200" class="counter-wrapper">
             <dt class="text-sm font-medium leading-6 text-gray-400">Communities</dt>
-            <dd class="mt-2 text-3xl font-bold leading-10 tracking-tight text-white">12</dd>
+            <dd class="mt-2 text-3xl font-bold leading-10 tracking-tight text-white counter" data-target="12">0</dd>
           </div>
-          <div>
+          <div data-aos="fade-up" data-aos-delay="300" class="counter-wrapper">
             <dt class="text-sm font-medium leading-6 text-gray-400">Programs Completed</dt>
-            <dd class="mt-2 text-3xl font-bold leading-10 tracking-tight text-white">50+</dd>
+            <dd class="mt-2 text-3xl font-bold leading-10 tracking-tight text-white counter" data-target="50">0</dd>
           </div>
-          <div>
+          <div data-aos="fade-up" data-aos-delay="400" class="counter-wrapper">
             <dt class="text-sm font-medium leading-6 text-gray-400">Partners</dt>
-            <dd class="mt-2 text-3xl font-bold leading-10 tracking-tight text-white">25</dd>
+            <dd class="mt-2 text-3xl font-bold leading-10 tracking-tight text-white counter" data-target="25">0</dd>
           </div>
         </dl>
       </div>
@@ -317,7 +349,7 @@
 </div>
 
 {{-- Testimonials --}}
-<div class="relative bg-gray-900 py-24 sm:py-32">
+<div id="testimonials" class="relative bg-gray-900 py-24 sm:py-32">
   <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
     <!-- Purple gradient background effect -->
     <div aria-hidden="true" class="absolute inset-0 -z-10 overflow-hidden">
@@ -333,7 +365,7 @@
     <!-- Testimonials grid -->
     <div class="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
       <!-- Testimonial 1 -->
-      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10">
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10" data-aos="fade-up">
         <p class="text-sm leading-6 text-gray-300">"Footprints of Hope has transformed our community. Their support for teenage mothers has given hope and new beginnings to many young women who previously had limited options."</p>
         <div class="mt-6 flex items-center gap-x-4">
           <div class="flex h-10 w-10 items-center justify-center rounded-full bg-pink-600 text-white font-bold">
@@ -347,7 +379,7 @@
       </div>
       
       <!-- Testimonial 2 -->
-      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10">
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10" data-aos="fade-up" data-aos-delay="100">
         <p class="text-sm leading-6 text-gray-300">"The mental health sessions completely changed my life. Having a safe space to discuss challenges and receive professional support has been invaluable for my emotional well-being."</p>
         <div class="mt-6 flex items-center gap-x-4">
           <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">
@@ -361,7 +393,7 @@
       </div>
       
       <!-- Testimonial 3 -->
-      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10 sm:col-span-2 lg:col-span-1">
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10 sm:col-span-2 lg:col-span-1" data-aos="fade-up" data-aos-delay="200">
         <p class="text-sm leading-6 text-gray-300">"Thanks to the business training and financial resources provided by Footprints of Hope, I now run a successful small business that supports my family. Their belief in me gave me the confidence to pursue entrepreneurship."</p>
         <div class="mt-6 flex items-center gap-x-4">
           <div class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600 text-white font-bold">
@@ -375,7 +407,7 @@
       </div>
       
       <!-- Testimonial 4 -->
-      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10">
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10" data-aos="fade-up" data-aos-delay="300">
         <p class="text-sm leading-6 text-gray-300">"The community mobilization initiatives have united our village in addressing health challenges. Together we've made significant progress in improving sanitation and health education."</p>
         <div class="mt-6 flex items-center gap-x-4">
           <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white font-bold">
@@ -389,7 +421,7 @@
       </div>
       
       <!-- Testimonial 5 -->
-      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10">
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10" data-aos="fade-up" data-aos-delay="400">
         <p class="text-sm leading-6 text-gray-300">"As a partner organization, we've seen firsthand the dedication and impact of Footprints of Hope. Their holistic approach to empowerment creates lasting change that extends beyond individuals to entire communities."</p>
         <div class="mt-6 flex items-center gap-x-4">
           <div class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-600 text-white font-bold">
@@ -403,7 +435,7 @@
       </div>
       
       <!-- Testimonial 6 -->
-      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10 sm:col-span-2 lg:col-span-1">
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10 sm:col-span-2 lg:col-span-1" data-aos="fade-up" data-aos-delay="500">
         <p class="text-sm leading-6 text-gray-300">"The educational scholarships provided to young mothers like me made it possible to continue my education despite the challenges of early parenthood. I'm now pursuing my dream of becoming a nurse to help others in my community."</p>
         <div class="mt-6 flex items-center gap-x-4">
           <div class="flex h-10 w-10 items-center justify-center rounded-full bg-purple-600 text-white font-bold">
@@ -439,7 +471,7 @@
 
 {{-- Contact Us --}}
 
-<div class="isolate bg-gray-900 px-6 py-24 sm:py-32 lg:px-8">
+<div id="contact" class="isolate bg-gray-900 px-6 py-24 sm:py-32 lg:px-8">
   <div aria-hidden="true" class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
     <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" class="relative left-1/2 -z-10 aspect-1155/678 w-144.5 max-w-none -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-40rem)] sm:w-288.75"></div>
   </div>
@@ -610,7 +642,7 @@
               <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
             </svg>
           </a>
-          <a href="#" class="text-gray-400 hover:text-white transition duration-150">
+          {{-- <a href="#" class="text-gray-400 hover:text-white transition duration-150"> --}}
             <span class="sr-only">GitHub</span>
             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
@@ -628,4 +660,83 @@
   </div>
 </footer>
 
+{{-- Add AOS JS library and initialize it at the end of the page --}}
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS animations
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: false,
+      mirror: true
+    });
+    
+    // Intersection Observer for lazy loading and animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    // Counter animation for statistics
+    const counters = document.querySelectorAll('.counter');
+    const counterObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseInt(counter.getAttribute('data-target'));
+          let count = 0;
+          const updateCount = () => {
+            const increment = target / 50; // Adjust speed here
+            if (count < target) {
+              count += increment;
+              // Format for thousands
+              counter.innerText = target > 1000 ? 
+                Math.ceil(count).toLocaleString() + '+' : 
+                Math.ceil(count) + (target > 30 ? '+' : '');
+              setTimeout(updateCount, 30);
+            } else {
+              counter.innerText = target > 1000 ? 
+                target.toLocaleString() + '+' : 
+                target + (target > 30 ? '+' : '');
+            }
+          };
+          updateCount();
+          observer.unobserve(counter);
+        }
+      });
+    }, observerOptions);
+    
+    counters.forEach(counter => {
+      counterObserver.observe(counter);
+    });
+    
+    // Enhance scroll behavior for large screens
+    if (window.innerWidth > 768) {
+      const sections = document.querySelectorAll('section, div[id]');
+      const navLinks = document.querySelectorAll('nav a[href^="#"]');
+      
+      // Highlight active nav item on scroll
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.pageYOffset >= sectionTop - 150) {
+            current = section.getAttribute('id');
+          }
+        });
+        
+        navLinks.forEach(link => {
+          link.classList.remove('text-indigo-400');
+          const href = link.getAttribute('href');
+          if (href === `#${current}`) {
+            link.classList.add('text-indigo-400');
+          }
+        });
+      });
+    }
+  });
+</script>
 @endsection
