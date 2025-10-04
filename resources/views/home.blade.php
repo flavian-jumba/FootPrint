@@ -2,8 +2,8 @@
 
 @section('content')
 
-{{-- Add AOS CSS library for scroll animations --}}
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{{-- Add AOS CSS library for scroll animations (via Vite) --}}
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 
 {{-- Home Section --}}
 <div id="home" class="bg-gray-900">
@@ -660,83 +660,5 @@
   </div>
 </footer>
 
-{{-- Add AOS JS library and initialize it at the end of the page --}}
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS animations
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: false,
-      mirror: true
-    });
-    
-    // Intersection Observer for lazy loading and animations
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-    
-    // Counter animation for statistics
-    const counters = document.querySelectorAll('.counter');
-    const counterObserver = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const counter = entry.target;
-          const target = parseInt(counter.getAttribute('data-target'));
-          let count = 0;
-          const updateCount = () => {
-            const increment = target / 50; // Adjust speed here
-            if (count < target) {
-              count += increment;
-              // Format for thousands
-              counter.innerText = target > 1000 ? 
-                Math.ceil(count).toLocaleString() + '+' : 
-                Math.ceil(count) + (target > 30 ? '+' : '');
-              setTimeout(updateCount, 30);
-            } else {
-              counter.innerText = target > 1000 ? 
-                target.toLocaleString() + '+' : 
-                target + (target > 30 ? '+' : '');
-            }
-          };
-          updateCount();
-          observer.unobserve(counter);
-        }
-      });
-    }, observerOptions);
-    
-    counters.forEach(counter => {
-      counterObserver.observe(counter);
-    });
-    
-    // Enhance scroll behavior for large screens
-    if (window.innerWidth > 768) {
-      const sections = document.querySelectorAll('section, div[id]');
-      const navLinks = document.querySelectorAll('nav a[href^="#"]');
-      
-      // Highlight active nav item on scroll
-      window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.clientHeight;
-          if (window.pageYOffset >= sectionTop - 150) {
-            current = section.getAttribute('id');
-          }
-        });
-        
-        navLinks.forEach(link => {
-          link.classList.remove('text-indigo-400');
-          const href = link.getAttribute('href');
-          if (href === `#${current}`) {
-            link.classList.add('text-indigo-400');
-          }
-        });
-      });
-    }
-  });
-</script>
+{{-- AOS animations are now loaded via app.js through Vite --}}
 @endsection

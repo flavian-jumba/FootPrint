@@ -1,3 +1,18 @@
+/* Import Tailwind CSS - using v3 syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+html {
+    scroll-behavior: smooth;
+}
+
+.counter {
+    transition: all 0.5s ease;
+}
+
+/* Fonts */
 @import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
