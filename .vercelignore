@@ -1,0 +1,16 @@
+/vendor
+/node_modules
+.env
+.env.*
+.git
+.github
+.gitignore
+.idea
+.vscode
+*.md
+.editorconfig
+docker-compose.yml
+Dockerfile
+phpunit.xml
+README.md
+storage/*.key

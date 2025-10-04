@@ -1,15 +1,26 @@
 {
   "version": 2,
-  "framework": "vite",
-  "buildCommand": "npm run build",
-  "outputDirectory": "public",
-  "installCommand": "npm install",
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.6.0"
+    }
+  },
+  "routes": [
+    { "src": "/build/(.*)", "dest": "/public/build/$1" },
+    { "src": "/favicon.ico", "dest": "/public/favicon.ico" },
+    { "src": "/robots.txt", "dest": "/public/robots.txt" },
+    { "src": "/storage/(.*)", "dest": "/public/storage/$1" },
+    { "src": "/assets/(.*)", "dest": "/public/assets/$1" },
+    { "src": "/(css|js)/(.*)", "dest": "/public/$1/$2" },
+    { "src": "/images/(.*)", "dest": "/public/images/$1" },
+    { "src": "/(.*)", "dest": "/api/index.php" }
+  ],
   "env": {
     "APP_NAME": "Footprints of Hope",
     "APP_ENV": "production",
     "APP_DEBUG": "false",
-    "APP_URL": "${VERCEL_URL}",
-    "ASSET_URL": "${VERCEL_URL}",
+    "APP_URL": "https://${VERCEL_URL}",
+    "ASSET_URL": "https://${VERCEL_URL}",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
     "APP_PACKAGES_CACHE": "/tmp/packages.php",
@@ -22,7 +33,5 @@
     "SSR_TEMP_PATH": "/tmp/ssr",
     "NODE_PATH": "node"
   },
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index.php" }
-  ]
+  "buildCommand": "npm run build && chmod +x vercel-build.sh && ./vercel-build.sh"
 }
