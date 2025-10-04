@@ -286,4 +286,108 @@
     </section>
   </div>
 </div>
+
+{{-- Testimonials --}}
+<div class="relative bg-gray-900 py-24 sm:py-32">
+  <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+    <!-- Purple gradient background effect -->
+    <div aria-hidden="true" class="absolute inset-0 -z-10 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-indigo-900/30 via-gray-900 to-gray-900"></div>
+    </div>
+    
+    <!-- Section header -->
+    <div class="mx-auto max-w-2xl text-center mb-16">
+      <p class="text-base font-semibold leading-7 text-indigo-400">Testimonials</p>
+      <h2 class="mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl">We have worked with<br>thousands of amazing people</h2>
+    </div>
+    
+    <!-- Testimonials grid -->
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Testimonial 1 -->
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10">
+        <p class="text-sm leading-6 text-gray-300">"Footprints of Hope has transformed our community. Their support for teenage mothers has given hope and new beginnings to many young women who previously had limited options."</p>
+        <div class="mt-6 flex items-center gap-x-4">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-pink-600 text-white font-bold">
+            JK
+          </div>
+          <div>
+            <div class="text-sm font-semibold leading-6 text-white">Jane Kamau</div>
+            <div class="text-xs text-gray-400">@janekamau</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Testimonial 2 -->
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10">
+        <p class="text-sm leading-6 text-gray-300">"The mental health sessions completely changed my life. Having a safe space to discuss challenges and receive professional support has been invaluable for my emotional well-being."</p>
+        <div class="mt-6 flex items-center gap-x-4">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">
+            MO
+          </div>
+          <div>
+            <div class="text-sm font-semibold leading-6 text-white">Michael Ochieng</div>
+            <div class="text-xs text-gray-400">@michaelochieng</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Testimonial 3 -->
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10 sm:col-span-2 lg:col-span-1">
+        <p class="text-sm leading-6 text-gray-300">"Thanks to the business training and financial resources provided by Footprints of Hope, I now run a successful small business that supports my family. Their belief in me gave me the confidence to pursue entrepreneurship."</p>
+        <div class="mt-6 flex items-center gap-x-4">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600 text-white font-bold">
+            FW
+          </div>
+          <div>
+            <div class="text-sm font-semibold leading-6 text-white">Faith Wanjiku</div>
+            <div class="text-xs text-gray-400">@faithwanjiku</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Testimonial 4 -->
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10">
+        <p class="text-sm leading-6 text-gray-300">"The community mobilization initiatives have united our village in addressing health challenges. Together we've made significant progress in improving sanitation and health education."</p>
+        <div class="mt-6 flex items-center gap-x-4">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white font-bold">
+            TM
+          </div>
+          <div>
+            <div class="text-sm font-semibold leading-6 text-white">Thomas Mwangi</div>
+            <div class="text-xs text-gray-400">@thomasmwangi</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Testimonial 5 -->
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10">
+        <p class="text-sm leading-6 text-gray-300">"As a partner organization, we've seen firsthand the dedication and impact of Footprints of Hope. Their holistic approach to empowerment creates lasting change that extends beyond individuals to entire communities."</p>
+        <div class="mt-6 flex items-center gap-x-4">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-600 text-white font-bold">
+            SN
+          </div>
+          <div>
+            <div class="text-sm font-semibold leading-6 text-white">Sarah Ndegwa</div>
+            <div class="text-xs text-gray-400">@sarahndegwa</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Testimonial 6 -->
+      <div class="rounded-2xl bg-gray-800/50 p-6 shadow-xl ring-1 ring-white/10 sm:col-span-2 lg:col-span-1">
+        <p class="text-sm leading-6 text-gray-300">"The educational scholarships provided to young mothers like me made it possible to continue my education despite the challenges of early parenthood. I'm now pursuing my dream of becoming a nurse to help others in my community."</p>
+        <div class="mt-6 flex items-center gap-x-4">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-purple-600 text-white font-bold">
+            LO
+          </div>
+          <div>
+            <div class="text-sm font-semibold leading-6 text-white">Lucy Otieno</div>
+            <div class="text-xs text-gray-400">@lucyotieno</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
