@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footprints of Hope - Static Fallback</title>
+    <style>
+        body { 
+            font-family: system-ui, sans-serif; 
+            background: #111827; 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 95vh; 
+            margin: 0; 
+            text-align: center; 
+        }
+        .container { 
+            max-width: 800px; 
+            padding: 20px; 
+        }
+        h1 { 
+            font-size: 2.5rem; 
+            margin-bottom: 1rem; 
+        }
+        p { 
+            font-size: 1.2rem; 
+            color: #d1d5db; 
+            margin-bottom: 2rem; 
+        }
+        .btn { 
+            background: #4f46e5; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            display: inline-block;
+            margin: 5px;
+        }
+        .btn:hover { 
+            background: #4338ca; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Footprints of Hope</h1>
+        <p>This is a static HTML fallback page.</p>
+        <div>
+            <a href="/vercel.php" class="btn">Test PHP</a>
+            <a href="/api/test.php" class="btn">Test API</a>
+            <a href="/api/index.php" class="btn">Launch Laravel</a>
+        </div>
+    </div>
+</body>
+</html>

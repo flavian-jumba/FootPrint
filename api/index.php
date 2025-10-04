@@ -1,44 +1,44 @@
 <?php
 
-// For Vercel, we need to make sure the paths are correct
-$basePath = __DIR__ . '/../';
+/**
+ * Laravel on Vercel - API entry point
+ * This file acts as the serverless function entry point
+ */
 
-// Check if this is running in a Vercel environment
-if (getenv('VERCEL') || getenv('VERCEL_URL')) {
-    // In Vercel, the function is in /var/task/api/
-    // but the application is in /var/task/
-    $basePath = realpath(__DIR__ . '/../');
-}
-
-// Check if we're in maintenance mode
-if (file_exists($basePath . '/storage/framework/maintenance.php')) {
-    require $basePath . '/storage/framework/maintenance.php';
-}
-
-// Make sure vendor exists
-if (!file_exists($basePath . '/vendor/autoload.php')) {
-    http_response_code(500);
-    echo "Server Error: Vendor directory not found. Please run 'composer install'.";
+// Output home page directly for testing
+if ($_SERVER['REQUEST_URI'] == '/' && !isset($_GET['laravel'])) {
+    echo '<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Footprints of Hope</title>
+        <style>
+            body { font-family: system-ui, sans-serif; background: #111827; color: white; display: flex; align-items: center; justify-content: center; height: 95vh; margin: 0; text-align: center; }
+            .container { max-width: 800px; padding: 20px; }
+            h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+            p { font-size: 1.2rem; color: #d1d5db; margin-bottom: 2rem; }
+            .btn { background: #4f46e5; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 600; }
+            .btn:hover { background: #4338ca; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Footprints of Hope</h1>
+            <p>This is a basic page served directly from the Vercel serverless function.</p>
+            <p>To see the full Laravel application, click below:</p>
+            <a href="/?laravel=1" class="btn">Launch Laravel App</a>
+        </div>
+    </body>
+    </html>';
     exit;
 }
 
-// Load Composer
-require $basePath . '/vendor/autoload.php';
-
-// Debug information
-if (isset($_GET['debug']) && $_GET['debug'] === 'vercel') {
+// For debugging
+if (isset($_GET['info'])) {
     phpinfo();
     exit;
 }
 
-// Bootstrap Laravel application
-$app = require_once $basePath . '/bootstrap/app.php';
-
-// Run the application
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-)->send();
-
-$kernel->terminate($request, $response);
+// Standard Laravel bootstrap
+require __DIR__ . '/../public/index.php';
