@@ -1,55 +1,44 @@
 <?php
 
-use Illuminate\Contracts\Http\Kernel;
-use Illuminate\Http\Request;
+// For Vercel, we need to make sure the paths are correct
+$basePath = __DIR__ . '/../';
 
-define('LARAVEL_START', microtime(true));
-
-/*
-|--------------------------------------------------------------------------
-| Check If The Application Is Under Maintenance
-|--------------------------------------------------------------------------
-|
-| If the application is in maintenance / demo mode via the "down" command
-| we will load this file so that any pre-rendered content can be shown
-| instead of starting the framework, which could cause an exception.
-|
-*/
-
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
-    require $maintenance;
+// Check if this is running in a Vercel environment
+if (getenv('VERCEL') || getenv('VERCEL_URL')) {
+    // In Vercel, the function is in /var/task/api/
+    // but the application is in /var/task/
+    $basePath = realpath(__DIR__ . '/../');
 }
 
-/*
-|--------------------------------------------------------------------------
-| Register The Auto Loader
-|--------------------------------------------------------------------------
-|
-| Composer provides a convenient, automatically generated class loader for
-| this application. We just need to utilize it! We'll simply require it
-| into the script here so we don't need to manually load our classes.
-|
-*/
+// Check if we're in maintenance mode
+if (file_exists($basePath . '/storage/framework/maintenance.php')) {
+    require $basePath . '/storage/framework/maintenance.php';
+}
 
-require __DIR__.'/../vendor/autoload.php';
+// Make sure vendor exists
+if (!file_exists($basePath . '/vendor/autoload.php')) {
+    http_response_code(500);
+    echo "Server Error: Vendor directory not found. Please run 'composer install'.";
+    exit;
+}
 
-/*
-|--------------------------------------------------------------------------
-| Run The Application
-|--------------------------------------------------------------------------
-|
-| Once we have the application, we can handle the incoming request using
-| the application's HTTP kernel. Then, we will send the response back
-| to this client's browser, allowing them to enjoy our application.
-|
-*/
+// Load Composer
+require $basePath . '/vendor/autoload.php';
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+// Debug information
+if (isset($_GET['debug']) && $_GET['debug'] === 'vercel') {
+    phpinfo();
+    exit;
+}
 
-$kernel = $app->make(Kernel::class);
+// Bootstrap Laravel application
+$app = require_once $basePath . '/bootstrap/app.php';
+
+// Run the application
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
-    $request = Request::capture()
+    $request = Illuminate\Http\Request::capture()
 )->send();
 
 $kernel->terminate($request, $response);
